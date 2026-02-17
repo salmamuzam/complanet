@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ComplaNet — Dashboard</title>
+
+  <script type="module" crossorigin src="../assets/userDashboard-DT46cwnv.js"></script>
+  <link rel="modulepreload" crossorigin href="../assets/darkMode-B-Ivf8oh.js">
+  <link rel="modulepreload" crossorigin href="../assets/notifications-UIo-hPC3.js">
+  <link rel="stylesheet" crossorigin href="../assets/darkMode-xVUYYjr3.css">
+</head>
+
+<body
+  class="flex flex-col min-h-screen bg-[var(--color-bg-light)] text-[var(--color-text-light)] dark:bg-[var(--color-bg-dark)] dark:text-[var(--color-text-dark)] transition-all duration-300 font-sans">
+
+  <!-- Header -->
+  <header
+    class="flex items-center justify-between px-6 lg:px-20 py-4 bg-pink dark:bg-gray-800 shadow-md transition-all duration-300">
+    <!-- Logo -->
+    <div class="flex items-center">
+      <a href="UserDashboard.html" class="flex items-center">
+        <!-- Light mode logo -->
+        <img src="../images/BGlessLogoDark.png" alt="ComplaNet Logo" class="h-16 block dark:hidden">
+        <!-- Dark mode logo -->
+        <img src="../images/BGlessLogo.png" alt="ComplaNet Logo Dark" class="h-16 hidden dark:block">
+      </a>
+    </div>
+
+    <!-- Desktop Links (Middle) -->
+    <nav class="hidden lg:flex gap-6 items-center">
+      <a href="UserDashboard.html"
+        class="font-semibold text-eco hover:text-eco-dark dark:text-blue-400 dark:hover:text-blue-300 whitespace-nowrap">Dashboard</a>
+      <a href="Newcomplaint.html" class="nav-content whitespace-nowrap">New Complaint</a>
+      <a href="LostAndFound.html" class="nav-content whitespace-nowrap">Report Lost</a>
+      <a href="Mycomplaint.html" class="nav-content whitespace-nowrap">My History</a>
+    </nav>
+
+    <!-- Right Side Actions (Bell + Profile + Hamburger) -->
+    <div class="flex items-center gap-4">
+
+      <!-- Notification Bell (Always Visible) -->
+      <div class="relative">
+        <button id="notificationBtn" class="flex items-center focus:outline-none relative">
+          <i class="fas fa-bell text-gray-500 text-3xl hover:text-eco transition"></i>
+          <span id="notificationBadge"
+            class="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full hidden">0</span>
+        </button>
+      </div>
+
+
+      <!-- Theme Toggle (Always Visible) -->
+      <button id="navbarThemeToggle"
+        class="flex w-10 h-10 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 dark:from-indigo-500 dark:to-purple-600 items-center justify-center text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-400 dark:focus:ring-indigo-500">
+        <i class="fas fa-sun text-lg hidden dark:block"></i>
+        <i class="fas fa-moon text-lg block dark:hidden"></i>
+      </button>
+
+      <!-- Profile Menu (Desktop Only) -->
+      <div class="relative hidden lg:block">
+        <button id="profileButton" class="flex items-center focus:outline-none profile-highlight">
+          <i class="fas fa-user text-gray-500 text-2xl hover:text-eco transition"></i>
+        </button>
+        <!-- Dropdown Menu -->
+        <div id="profileMenu"
+          class="hidden absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg py-2 z-50 transition-all duration-200">
+          <a href="Profile.html"
+            class="block px-4 py-2 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">View
+            Profile</a>
+          <a href="javascript:void(0)" id="headerLogoutBtn"
+            class="block px-4 py-2 text-red-600 hover:bg-gray-100 dark:hover:bg-gray-700">Log Out</a>
+        </div>
+      </div>
+
+      <!-- Mobile Hamburger -->
+      <button id="mobileMenuButton"
+        class="lg:hidden text-gray-800 dark:text-gray-200 focus:outline-none transition-transform hover:scale-110">
+        <i class="fas fa-bars text-3xl"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Side Menu -->
+  <aside id="mobileMenu"
+    class="fixed top-0 left-0 w-64 h-full bg-white dark:bg-gray-800 shadow-lg transform -translate-x-full transition-transform duration-300 z-50 flex flex-col justify-between">
+    <div>
+      <div class="flex items-center px-6 py-4 border-b dark:border-gray-700">
+        <a href="UserDashboard.html">
+          <img src="../images/BGlessLogoDark.png" alt="Logo" class="h-16">
+        </a>
+      </div>
+      <nav class="mt-6 flex flex-col space-y-6 px-6">
+        <a href="UserDashboard.html"
+          class="flex items-center font-semibold text-eco hover:text-eco-dark dark:text-blue-400 dark:hover:text-blue-300">
+          <i class="fas fa-th-large w-6 mr-3 text-lg"></i> Dashboard
+        </a>
+        <a href="Notifications.html" class="nav-content flex items-center text-gray-700 dark:text-gray-300">
+          <i class="fas fa-bell w-6 mr-3 text-lg"></i> Notifications
+        </a>
+        <a href="Newcomplaint.html" class="nav-content flex items-center text-gray-700 dark:text-gray-300">
+          <i class="fas fa-plus-circle w-6 mr-3 text-lg"></i> New Complaint
+        </a>
+        <a href="LostAndFound.html" class="nav-content flex items-center text-gray-700 dark:text-gray-300">
+          <i class="fas fa-search w-6 mr-3 text-lg"></i> Report Lost
+        </a>
+        <a href="Mycomplaint.html" class="nav-content flex items-center text-gray-700 dark:text-gray-300">
+          <i class="fas fa-history w-6 mr-3 text-lg"></i> My History
+        </a>
+        <a href="Profile.html" class="nav-content flex items-center text-gray-700 dark:text-gray-300">
+          <i class="fas fa-user-circle w-6 mr-3 text-lg"></i> View Profile
+        </a>
+      </nav>
+    </div>
+    <div class="px-6 py-4 border-t dark:border-gray-700 flex flex-col space-y-4">
+      <a href="javascript:void(0)" id="mobileLogoutBtn"
+        class="flex items-center py-2 text-red-500 hover:text-red-700 transition font-medium">
+        <i class="fas fa-sign-out-alt w-6 mr-3 text-lg"></i> Log Out
+      </a>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="flex-1 px-6 py-8 md:px-10">
+
+    <!-- USER NAME SHOULD BE FROM DB -->
+    <!-- Welcome message -->
+    <h1 class="text-2xl font-bold mb-4" id="welcomeUsername">Welcome!</h1>
+    <p class="mb-6 text-gray-600 dark:text-gray-300">
+      This is your complaints dashboard where you can submit new complaints and track their progress.
+    </p>
+
+    <div class="flex flex-wrap gap-4 mb-8">
+      <button class="px-6 py-3 rounded-xl font-semibold
+      bg-gray-700 text-white
+      hover:bg-blue-400 hover:-translate-y-0.5
+      shadow-[0_4px_12px_rgba(0,0,0,0.3)]
+      transition-all duration-300 flex items-center gap-2" onclick="window.location.href='Newcomplaint.html'">
+        <i class="fas fa-file-alt"></i>
+        FILE A COMPLAINT
+      </button>
+
+      <button class="px-6 py-3 rounded-xl font-semibold
+      bg-gray-700 text-white
+      hover:bg-blue-400 hover:-translate-y-0.5
+      shadow-[0_4px_12px_rgba(0,0,0,0.3)]
+      transition-all duration-300 flex items-center gap-2" onclick="window.location.href='LostAndFound.html'">
+        <i class="fas fa-search"></i>
+        REPORT LOST ITEM
+      </button>
+    </div>
+
+    <!-- Complaint Stats -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+      <div
+        class="group cursor-pointer bg-gradient-to-br from-red-50 to-white dark:from-gray-800 dark:to-gray-900 rounded-2xl shadow-lg p-6 border-l-4 border-pending hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 hover:scale-105"
+        onclick="filterComplaints('Pending')">
+        <div class="flex items-center justify-between">
+          <div>
+            <h3 class="text-4xl font-bold text-pending mb-2" id="pendingCount">0</h3>
+            <p class="text-gray-600 dark:text-gray-300 font-medium">Pending Complaints</p>
+          </div>
+          <div
+            class="bg-red-100 dark:bg-red-900/30 p-4 rounded-full group-hover:scale-110 transition-transform duration-300">
+            <i class="fas fa-clock text-3xl text-pending"></i>
+          </div>
+        </div>
+      </div>
+      <div
+        class="group cursor-pointer bg-gradient-to-br from-yellow-50 to-white dark:from-gray-800 dark:to-gray-900 rounded-2xl shadow-lg p-6 border-l-4 border-progress hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 hover:scale-105"
+        onclick="filterComplaints('In-Progress')">
+        <div class="flex items-center justify-between">
+          <div>
+            <h3 class="text-4xl font-bold text-progress mb-2" id="inProgressCount">0</h3>
+            <p class="text-gray-600 dark:text-gray-300 font-medium">In-Progress</p>
+          </div>
+          <div
+            class="bg-yellow-100 dark:bg-yellow-900/30 p-4 rounded-full group-hover:scale-110 transition-transform duration-300">
+            <i class="fas fa-spinner text-3xl text-progress"></i>
+          </div>
+        </div>
+      </div>
+      <div
+        class="group cursor-pointer bg-gradient-to-br from-green-50 to-white dark:from-gray-800 dark:to-gray-900 rounded-2xl shadow-lg p-6 border-l-4 border-resolved hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 hover:scale-105"
+        onclick="filterComplaints('Resolved')">
+        <div class="flex items-center justify-between">
+          <div>
+            <h3 class="text-4xl font-bold text-resolved mb-2" id="resolvedCount">0</h3>
+            <p class="text-gray-600 dark:text-gray-300 font-medium">Resolved Complaints</p>
+          </div>
+          <div
+            class="bg-green-100 dark:bg-green-900/30 p-4 rounded-full group-hover:scale-110 transition-transform duration-300">
+            <i class="fas fa-check-circle text-3xl text-resolved"></i>
+          </div>
+        </div>
+      </div>
+      <div
+        class="group cursor-pointer bg-gradient-to-br from-red-50 to-white dark:from-gray-800 dark:to-gray-900 rounded-2xl shadow-lg p-6 border-l-4 border-red-500 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 hover:scale-105"
+        onclick="filterComplaints('Deleted')">
+        <div class="flex items-center justify-between">
+          <div>
+            <h3 class="text-4xl font-bold text-red-500 mb-2" id="deletedCount">0</h3>
+            <p class="text-gray-600 dark:text-gray-300 font-medium">Deleted Complaints</p>
+          </div>
+          <div
+            class="bg-red-100 dark:bg-red-900/30 p-4 rounded-full group-hover:scale-110 transition-transform duration-300">
+            <i class="fas fa-trash-alt text-3xl text-red-500"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================
+        RECENT COMPLAINTS SECTION  
+        ============================ -->
+    <section class="mt-12">
+      <h2 class="text-xl font-bold mb-4">Recent Complaints</h2>
+
+      <!-- List Container -->
+      <div id="recentComplaintsContainer"></div>
+
+      <!-- TEMPLATE (JS will clone this) -->
+      <template id="complaintCardTemplate">
+        <div
+          class="complaint-card mb-2 bg-white dark:bg-gray-800 rounded-xl shadow p-5 border border-gray-200 dark:border-gray-700 hover:shadow-lg transition cursor-pointer flex justify-between items-center group">
+
+          <div class="flex-1">
+            <h3 class="title text-lg font-semibold text-gray-900 dark:text-white"></h3>
+            <p class="description mt-1 text-gray-600 dark:text-gray-300 text-sm line-clamp-2"></p>
+
+            <div class="footer mt-4 flex justify-between items-center mobile:flex-col mobile:items-start mobile:gap-1">
+              <span class="status px-3 py-1 text-xs font-semibold rounded-full"></span>
+              <span class="date text-xs text-gray-500"></span>
+            </div>
+          </div>
+          <i class="fas fa-chevron-right text-gray-300 group-hover:text-blue-500 transition ml-4"></i>
+        </div>
+      </template>
+
+      <div class="mt-6 text-center">
+        <a href="Mycomplaint.html" class="px-6 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-600 transition">
+          See More
+        </a>
+      </div>
+    </section>
+
+    <footer class="w-full py-10 mt-10 
+         bg-[var(--color-eco-light)] text-[var(--color-text-light)]
+         dark:bg-[#0F1A24] dark:text-gray-200">
+
+      <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 text-center md:text-left">
+
+        <!-- Column 1 -->
+        <div>
+          <h2 class="text-xl font-semibold mb-4 
+                 text-[var(--color-blue-btn)] 
+                 dark:text-blue-400">
+            ComplaNet
+          </h2>
+          <p class="text-sm leading-6">
+            ComplaNet is your unified university complaint management system.<br>
+            Submit, track, and manage your complaints easily and securely.
+          </p>
+        </div>
+
+        <!-- Column 2 -->
+        <div>
+          <h2 class="text-xl font-semibold mb-4 
+                 text-[var(--color-blue-btn)]
+                 dark:text-blue-400">
+            Quick Navigation
+          </h2>
+          <ul class="space-y-2 text-sm">
+            <li><a href="./UserDashboard.html" class="hover:text-blue-700 dark:hover:text-blue-400">Dashboard</a></li>
+            <li><a href="./Newcomplaint.html" class="hover:text-blue-700 dark:hover:text-blue-400">New Complaint</a>
+            </li>
+            <li><a href="./LostAndFound.html" class="hover:text-blue-700 dark:hover:text-blue-400">Report Lost</a></li>
+            <li><a href="./Mycomplaint.html" class="hover:text-blue-700 dark:hover:text-blue-400">My History</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 3 -->
+        <div>
+          <h2 class="text-xl font-semibold mb-4 
+                 text-[var(--color-blue-btn)]
+                 dark:text-blue-400">
+            Complaint Category
+          </h2>
+
+          <details class="bg-[var(--color-eco)] dark:bg-[#1A2C36] 
+               p-4 rounded-lg cursor-pointer text-sm">
+            <summary class="font-medium text-white hover:text-blue-200 dark:text-gray-300 dark:hover:text-blue-400">
+              Select Complaint Type
+            </summary>
+
+            <ul class="mt-3 space-y-2 pl-3">
+              <li><a href="./AcademicForm.html"
+                  class="text-white hover:text-blue-200 dark:text-gray-300 dark:hover:text-blue-400">Academic
+                  Complaint</a>
+              </li>
+              <li><a href="./FacilityForm.html"
+                  class="text-white hover:text-blue-200 dark:text-gray-300 dark:hover:text-blue-400">Facility
+                  Complaint</a>
+              </li>
+              <li><a href="./AdministrativeForm.html"
+                  class="text-white hover:text-blue-200 dark:text-gray-300 dark:hover:text-blue-400">Administrative
+                  Complaint</a></li>
+              <li><a href="./StudentBehaviorForm.html"
+                  class="text-white hover:text-blue-200 dark:text-gray-300 dark:hover:text-blue-400">Student Behavior
+                  Complaint</a></li>
+              <li><a href="./TechnicalForm.html"
+                  class="text-white hover:text-blue-200 dark:text-gray-300 dark:hover:text-blue-400">Technical
+                  Complaint</a>
+              </li>
+              <li><a href="./OtherForm.html"
+                  class="text-white hover:text-blue-200 dark:text-gray-300 dark:hover:text-blue-400">Other Complaint</a>
+              </li>
+            </ul>
+          </details>
+        </div>
+
+      </div>
+
+      <div class="text-center text-sm mt-10 text-gray-700 dark:text-gray-400">
+        © 2025 ComplaNet. All rights reserved.
+      </div>
+
+    </footer>
+
+
+
+
+  </main>
+
+</body>
+
+</html>

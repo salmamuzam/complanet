@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ComplaNet — Login</title>
+  <script type="module" crossorigin src="../assets/login-BmVbpCcI.js"></script>
+  <link rel="modulepreload" crossorigin href="../assets/darkMode-B-Ivf8oh.js">
+  <link rel="stylesheet" crossorigin href="../assets/darkMode-xVUYYjr3.css">
+</head>
+
+<body
+  class="flex flex-col min-h-screen bg-[var(--color-bg-light)] text-[var(--color-text-light)] dark:bg-[var(--color-bg-dark)] dark:text-[var(--color-text-dark)] transition-all duration-300 font-sans">
+
+  <!-- Main Section -->
+  <main class="flex flex-1 items-center justify-center px-6 py-12">
+    <div class="w-full max-w-md bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8 animate-fade-in">
+
+      <!-- Logo -->
+      <div class="flex flex-col items-center mb-8">
+        <!-- Light Mode Logo -->
+        <img src="../images/BGlessLogoDark.png" alt="ComplaNet Logo"
+          class="h-20 mb-3 dark:hidden transition-all duration-300" />
+
+        <!-- Dark Mode Logo -->
+        <img src="../images/BGlessLogo.png" alt="ComplaNet Logo (Dark)"
+          class="h-20 mb-3 hidden dark:block transition-all duration-300" />
+
+        <h1 class="text-2xl font-heading text-greenvine-dark dark:text-greenvine-light font-bold">
+          Welcome to ComplaNet
+        </h1>
+        <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">
+          University Complaint Management System
+        </p>
+      </div>
+
+      <!-- Login Form -->
+      <form id="loginForm" class="space-y-5" novalidate>
+        <!-- Error Message Container -->
+        <div id="loginError"
+          class="hidden bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-red-600 dark:text-red-400 px-4 py-3 rounded-lg text-sm flex items-center gap-2 animate-shake">
+          <i class="fas fa-exclamation-circle"></i>
+          <span id="errorText"></span>
+        </div>
+        <div>
+          <label for="email" class="block font-semibold mb-1">University Email</label>
+          <input type="email" id="email"
+            class="w-full border border-gray-300 dark:border-gray-600 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-eco-dark bg-[var(--color-bg-light)] dark:bg-[var(--color-bg-dark)] text-[var(--color-text-light)] dark:text-[var(--color-text-dark)] transition"
+            placeholder="student@university.edu" />
+        </div>
+
+        <div>
+          <label for="password" class="block font-semibold mb-1">Password</label>
+          <div class="relative">
+            <input type="password" id="password"
+              class="w-full border border-gray-300 dark:border-gray-600 rounded px-4 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-eco-dark bg-[var(--color-bg-light)] dark:bg-[var(--color-bg-dark)] text-[var(--color-text-light)] dark:text-[var(--color-text-dark)] transition"
+              placeholder="••••••••" />
+            <button type="button" id="togglePassword"
+              class="absolute inset-y-0 right-0 px-3 flex items-center text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none">
+              <!-- Eye Icon (Show) -->
+              <i class="fas fa-eye text-xl hidden" id="eyeIcon"></i>
+              <!-- Eye Off Icon (Hide) -->
+              <i class="fas fa-eye-slash text-xl" id="eyeOffIcon"></i>
+            </button>
+          </div>
+        </div>
+
+        <button type="submit"
+          class="w-full btn btn-secondary py-2 mt-4 text-lg rounded-lg shadow-eco hover:shadow-green transition-all">
+          Log In
+        </button>
+      </form>
+
+      <!-- Extras -->
+      <div class="mt-6 text-center text-sm text-gray-500 dark:text-gray-400">
+        <a href="ResetPassword.html" class="hover:text-eco-dark transition">Forgot Password?</a>
+      </div>
+
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="py-4 text-center text-sm text-gray-500 dark:text-gray-400">
+    &copy; 2025 ComplaNet — University Complaint Management System
+  </footer>
+
+
+</body>
+
+</html>

@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Complaints — ComplaNet Admin</title>
+  <script type="module" crossorigin src="../assets/allComplaints-DTT5TK0x.js"></script>
+  <link rel="modulepreload" crossorigin href="../assets/darkMode-B-Ivf8oh.js">
+  <link rel="stylesheet" crossorigin href="../assets/darkMode-xVUYYjr3.css">
+</head>
+
+<body
+    class="flex flex-col min-h-screen bg-[var(--color-bg-light)] text-[var(--color-text-light)] dark:bg-[var(--color-bg-dark)] dark:text-[var(--color-text-dark)] transition-all duration-300 font-sans">
+
+    <!-- Header -->
+    <header
+        class="flex items-center justify-between px-6 lg:px-20 py-4 bg-pink dark:bg-gray-800 shadow-md transition-all duration-300">
+        <!-- Logo -->
+        <div class="flex items-center">
+            <img src="../images/BGlessLogoDark.png" alt="ComplaNet Logo" class="h-16 block dark:hidden">
+            <img src="../images/BGlessLogo.png" alt="ComplaNet Logo Dark" class="h-16 hidden dark:block">
+        </div>
+
+        <!-- Desktop Navigation (Middle) -->
+        <nav class="hidden lg:flex gap-6 items-center">
+            <a href="AdminDashboard.html" id="navDashboard" class="nav-content whitespace-nowrap">Dashboard</a>
+            <a href="AllComplaints.html" id="navAllComplaints"
+                class="font-semibold text-eco hover:text-eco-dark dark:text-blue-400 dark:hover:text-blue-300 whitespace-nowrap">All
+                Complaints</a>
+            <a href="Analytics.html" id="navAnalytics" class="nav-content whitespace-nowrap">Analytics</a>
+        </nav>
+
+        <!-- Right Side Actions -->
+        <div class="flex items-center gap-4">
+            <!-- Theme Toggle (Always Visible) -->
+            <button id="navbarThemeToggle"
+                class="flex w-10 h-10 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 dark:from-indigo-500 dark:to-purple-600 flex items-center justify-center text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-400 dark:focus:ring-indigo-500 ">
+                <i class="fas fa-sun text-lg hidden dark:block"></i>
+                <i class="fas fa-moon text-lg block dark:hidden"></i>
+            </button>
+
+            <!-- Profile Menu -->
+            <div class="relative hidden lg:block">
+                <button id="profileButton" class="flex items-center focus:outline-none profile-highlight">
+                    <i class="fas fa-user-shield text-gray-500 text-2xl hover:text-eco transition"></i>
+                </button>
+                <div id="profileMenu"
+                    class="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg py-2 hidden z-50 transition-all duration-200">
+                    <a href="AdminProfile.html"
+                        class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Profile</a>
+                    <button id="headerLogoutBtn" class="w-full text-left px-4 py-2 hover:bg-red-50 text-red-500">Log
+                        Out</button>
+                </div>
+            </div>
+
+            <!-- Mobile Hamburger -->
+            <button id="mobileMenuButton"
+                class="lg:hidden text-gray-800 dark:text-gray-200 focus:outline-none transition-transform hover:scale-110">
+                <i class="fas fa-bars text-3xl"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Side Menu -->
+    <aside id="mobileMenu"
+        class="fixed top-0 left-0 w-64 h-full bg-white dark:bg-gray-800 shadow-lg transform -translate-x-full transition-transform duration-300 z-50 flex flex-col justify-between">
+        <div>
+            <div class="flex items-center px-6 py-4 border-b dark:border-gray-700">
+                <a href="AdminDashboard.html" id="mobileLogoLink">
+                    <img src="../images/BGlessLogoDark.png" alt="Logo" class="h-16">
+                </a>
+            </div>
+            <nav class="mt-6 flex flex-col space-y-6 px-6">
+                <a href="AdminDashboard.html" id="mobileNavDashboard"
+                    class="nav-content flex items-center text-gray-700 dark:text-gray-300">
+                    <i class="fas fa-th-large w-6 mr-3 text-lg"></i> Dashboard
+                </a>
+                <a href="AllComplaints.html" id="mobileNavAllComplaints"
+                    class="flex items-center font-semibold text-eco-dark hover:text-eco-dark dark:text-blue-400 dark:hover:text-blue-300">
+                    <i class="fas fa-clipboard-list w-6 mr-3 text-lg"></i> All Complaints
+                </a>
+                <a href="Analytics.html" id="mobileNavAnalytics"
+                    class="nav-content flex items-center text-gray-700 dark:text-gray-300">
+                    <i class="fas fa-chart-line w-6 mr-3 text-lg"></i> Analytics
+                </a>
+                <a href="AdminProfile.html" class="nav-content flex items-center text-gray-700 dark:text-gray-300">
+                    <i class="fas fa-user-shield w-6 mr-3 text-lg"></i> Admin Profile
+                </a>
+            </nav>
+        </div>
+        <div class="px-6 py-4 border-t dark:border-gray-700 flex flex-col space-y-4">
+            <a href="Login.html" class="flex items-center py-2 text-red-500 hover:text-red-700 transition font-medium">
+                <i class="fas fa-sign-out-alt w-6 mr-3 text-lg"></i> Log Out
+            </a>
+        </div>
+    </aside>
+
+    <!-- Overlay -->
+    <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 hidden z-40"></div>
+
+    <!-- Main Content -->
+    <main class="flex-1 px-6 py-8 md:px-10">
+        <div class="flex justify-between items-center mb-6">
+            <div>
+                <h1 class="text-3xl font-bold mb-1">Manage Complaints</h1>
+                <p class="text-gray-600 dark:text-gray-300">
+                    Total Complaints: <span id="totalComplaintsCount"
+                        class="font-bold text-eco-dark dark:text-blue-400">0</span>
+                </p>
+            </div>
+        </div>
+
+        <!-- Controls: Search & Filters -->
+        <div class="flex flex-col lg:flex-row justify-between items-stretch gap-4 mb-6">
+            <!-- Search -->
+            <div class="relative w-full lg:w-1/2">
+                <div
+                    class="flex items-center w-full border rounded-lg bg-white dark:bg-gray-700 dark:border-gray-600 focus-within:ring-2 focus-within:ring-eco overflow-hidden">
+                    <span class="pl-3 pr-2 text-gray-400">
+                        <i class="fas fa-search"></i>
+                    </span>
+                    <input type="text" id="searchInput"
+                        class="w-full py-2 bg-transparent border-none focus:ring-0 focus:outline-none text-gray-700 dark:text-white placeholder-gray-500"
+                        placeholder="Search for complaints (title, description, id)...">
+                </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="flex flex-col xl:flex-row gap-3">
+                <!-- Date Filter -->
+
+                <div class="flex gap-2 w-full sm:w-auto">
+                    <input type="date" id="filterDateFrom"
+                        class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-eco dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:[color-scheme:dark]"
+                        placeholder="From Date" title="From Date">
+                    <span class="self-center text-gray-500">-</span>
+                    <input type="date" id="filterDateTo"
+                        class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-eco dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:[color-scheme:dark]"
+                        placeholder="To Date" title="To Date">
+                </div>
+                <!-- Category Filter (Master Admin Only) -->
+                <select id="filterCategory"
+                    class="hidden w-full sm:w-auto px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-eco dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                    <option value="">All Categories</option>
+                    <option value="Technical">Technical</option>
+                    <option value="Academic">Academic</option>
+                    <option value="Facility">Facility</option>
+                    <option value="Administrative">Administrative</option>
+                    <option value="Student Disciplinary">Student Disciplinary</option>
+                    <option value="Other">Other</option>
+                </select>
+
+                <select id="filterPriority"
+                    class="w-full sm:w-auto px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-eco dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                    <option value="">All Priorities</option>
+                    <option value="High">High</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Low">Low</option>
+                    <option value="Unprioritized">Unprioritized</option>
+                </select>
+
+                <select id="filterStatus"
+                    class="w-full sm:w-auto px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-eco dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                    <option value="">All Status</option>
+                    <option value="Pending">Pending</option>
+                    <option value="In-Progress">In Progress</option>
+                    <option value="Resolved">Resolved</option>
+                </select>
+
+
+            </div>
+        </div>
+
+        <!-- Complaints Table (Desktop) -->
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden hidden xl:block">
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead
+                        class="bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-200 uppercase text-sm leading-normal">
+                        <tr>
+
+                            <th class="py-3 px-6 text-left">Complaint ID</th>
+                            <th class="py-3 px-6 text-left">Complaint Title</th>
+                            <th class="py-3 px-6 text-left">Category</th>
+                            <th class="py-3 px-6 text-left">Priority</th>
+                            <th class="py-3 px-6 text-left">Date Reported</th>
+                            <th class="py-3 px-6 text-left">Reported By</th>
+                            <th class="py-3 px-6 text-center">Status</th>
+                            <th class="py-3 px-6 text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="complaintsTableBody" class="text-gray-600 dark:text-gray-300 text-sm font-light">
+                        <!-- Rows will be populated by JS -->
+                        <tr>
+                            <td colspan="7" class="py-6 text-center">Loading complaints...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Complaints Cards View (Mobile/Tablet) -->
+        <div id="complaintsCardsView" class="grid grid-cols-1 sm:grid-cols-2 gap-4 xl:hidden">
+            <!-- Cards will be populated by JS -->
+            <p class="text-center text-gray-500 py-4 col-span-full">Loading complaints...</p>
+        </div>
+
+        <!-- Template for Complaint Card (Mobile) -->
+        <template id="complaintCardTemplate">
+            <div
+                class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 flex flex-col items-center text-center border border-gray-100 dark:border-gray-700 hover:shadow-lg transition-shadow">
+                <div class="mb-3">
+                    <!-- Category Badge -->
+                    <span class="card-category px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide"></span>
+                </div>
+
+                <h3 class="card-title text-lg font-bold text-gray-800 dark:text-white mb-2 line-clamp-2 leading-tight">
+                </h3>
+
+                <p class="card-user text-sm font-semibold text-eco dark:text-green-400 mb-1"></p>
+                <p class="text-xs text-gray-500 dark:text-gray-400 mb-4 font-mono">
+                    ID: <span class="card-id"></span>
+                </p>
+
+                <!-- Details Grid -->
+                <div
+                    class="grid grid-cols-2 gap-x-4 gap-y-2 w-full text-sm mb-4 border-t border-b border-gray-100 dark:border-gray-700 py-3">
+                    <div class="text-right text-gray-500 dark:text-gray-400">Date:</div>
+                    <div class="card-date text-left font-medium text-gray-700 dark:text-gray-300 text-xs mt-0.5"></div>
+
+                    <div class="text-right text-gray-500 dark:text-gray-400">Status:</div>
+                    <div class="text-left">
+                        <span class="card-status px-2 py-0.5 rounded text-[10px] font-bold uppercase"></span>
+                    </div>
+
+                    <div class="text-right text-gray-500 dark:text-gray-400 self-center">Priority:</div>
+                    <div class="text-left card-priority">
+                        <!-- Priority Button/Badge injected here -->
+                    </div>
+                </div>
+
+                <p class="card-desc text-sm text-gray-600 dark:text-gray-300 line-clamp-3 mb-6 px-2"></p>
+
+                <!-- Actions Footer -->
+                <div class="flex items-center justify-center space-x-4 w-full mt-auto mb-1">
+                    <button
+                        class="btn-status text-blue-700 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300 transform hover:scale-110 transition p-2"
+                        title="Edit Status">
+                        <i class="fas fa-edit text-xl"></i>
+                    </button>
+                    <button
+                        class="btn-preview text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200 transform hover:scale-110 transition p-2"
+                        title="View Details">
+                        <i class="fas fa-eye text-xl"></i>
+                    </button>
+                    <button
+                        class="btn-delete text-red-500 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 transform hover:scale-110 transition p-2"
+                        title="Delete">
+                        <i class="fas fa-trash-alt text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </template>
+
+        <!-- Template for Complaint Row -->
+        <template id="complaintRowTemplate">
+            <tr
+                class="border-b border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition">
+
+                <td class="py-4 px-6 text-left">
+                    <span class="font-bold text-gray-800 dark:text-gray-200 col-id"></span>
+                </td>
+                <td class="py-4 px-6 text-left">
+                    <span class="font-semibold text-gray-800 dark:text-gray-200 col-title"></span>
+                </td>
+                <td class="py-4 px-6 text-left">
+                    <span class="col-category inline-block px-3 py-1 rounded-full text-xs font-semibold"></span>
+                </td>
+                <td class="py-4 px-6 text-left col-priority"></td>
+                <td class="py-4 px-6 text-left text-gray-600 dark:text-gray-400 col-date"></td>
+                <td class="py-4 px-6 text-left">
+                    <div>
+                        <p class="text-sm font-semibold text-gray-800 dark:text-gray-200 complainant-name"></p>
+                    </div>
+                </td>
+                <td class="py-4 px-6 text-center">
+                    <span class="col-status py-1 px-3 rounded-full text-xs font-semibold"></span>
+                </td>
+                <td class="py-4 px-6 text-center">
+                    <div class="flex item-center justify-center space-x-2">
+                        <button
+                            class="flex items-center px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-medium rounded-md transition shadow-sm btn-status">
+                            <i class="fas fa-edit mr-1.5"></i> Edit
+                        </button>
+                        <button
+                            class="flex items-center px-3 py-1.5 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 text-xs font-medium rounded-md transition shadow-sm btn-preview">
+                            <i class="fas fa-eye mr-1.5"></i> Preview
+                        </button>
+                        <button
+                            class="flex items-center px-3 py-1.5 bg-white dark:bg-gray-800 border border-red-200 dark:border-red-900 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 text-xs font-medium rounded-md transition shadow-sm btn-delete">
+                            <i class="fas fa-trash-alt mr-1.5"></i> Delete
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        </template>
+
+        <!-- Pagination -->
+        <div class="flex flex-col md:flex-row justify-between items-center mt-6">
+            <div class="text-sm text-gray-600 dark:text-gray-400 mb-4 md:mb-0">
+                Showing <span id="startRange">0</span>-<span id="endRange">0</span> of <span id="totalEntries">0</span>
+            </div>
+
+            <div class="flex items-center space-x-1">
+                <button id="prevPage"
+                    class="px-3 py-1 border rounded hover:bg-gray-100 dark:hover:bg-gray-700 dark:border-gray-600 dark:text-white disabled:opacity-50">
+                    &lt;
+                </button>
+                <div id="paginationNumbers" class="flex space-x-1">
+                    <!-- Page numbers will be injected here -->
+                </div>
+                <button id="nextPage"
+                    class="px-3 py-1 border rounded hover:bg-gray-100 dark:hover:bg-gray-700 dark:border-gray-600 dark:text-white disabled:opacity-50">
+                    &gt;
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full py-10 mt-10 
+           bg-[var(--color-eco-light)] text-[var(--color-text-light)]
+           dark:bg-[#0F1A24] dark:text-gray-200">
+
+        <div class="max-w-4xl mx-auto px-6">
+
+            <!-- ComplaNet Admin Title -->
+            <div class="text-center mb-8">
+                <h2 class="text-2xl font-heading font-bold mb-3 text-[var(--color-blue-btn)] dark:text-blue-400">
+                    ComplaNet Admin
+                </h2>
+                <p class="text-sm leading-6 opacity-80 max-w-2xl mx-auto">
+                    Administrative portal for managing university complaints. Monitor, assign, and resolve complaints
+                    efficiently.
+                </p>
+            </div>
+
+            <!-- Quick Navigation - Centered -->
+            <div class="text-center mb-8">
+                <h3 class="text-lg font-semibold mb-4 text-[var(--color-blue-btn)] dark:text-blue-400">
+                    Quick Navigation
+                </h3>
+                <ul class="flex flex-wrap justify-center gap-6 text-sm">
+                    <li>
+                        <a href="./AdminDashboard.html"
+                            class="inline-flex items-center gap-2 text-gray-800 hover:text-blue-700 dark:text-gray-300 dark:hover:text-blue-400 transition-all duration-300 hover:-translate-y-1">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="AllComplaints.html"
+                            class="inline-flex items-center gap-2 text-gray-800 hover:text-blue-700 dark:text-gray-300 dark:hover:text-blue-400 transition-all duration-300 hover:-translate-y-1">
+                            <i class="fas fa-list-alt"></i>
+                            <span>All Complaints</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="Analytics.html"
+                            class="inline-flex items-center gap-2 text-gray-800 hover:text-blue-700 dark:text-gray-300 dark:hover:text-blue-400 transition-all duration-300 hover:-translate-y-1">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Analytics</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="text-center text-sm mt-10 text-gray-700 dark:text-gray-400">
+                © 2025 ComplaNet. All rights reserved.
+            </div>
+
+    </footer>
+
+    <!-- ============================ -->
+    <!-- STATUS CHANGE MODAL -->
+    <!-- ============================ -->
+    <div id="statusModal" class="fixed inset-0 z-50 hidden overflow-y-auto" aria-labelledby="modal-title" role="dialog"
+        aria-modal="true">
+        <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <!-- Background overlay -->
+            <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+
+            <!-- Modal Panel -->
+            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+            <div
+                class="inline-block align-bottom bg-white dark:bg-gray-800 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+                <div class="bg-white dark:bg-gray-800 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                    <div class="sm:flex sm:items-start">
+                        <div
+                            class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 dark:bg-blue-900 sm:mx-0 sm:h-10 sm:w-10">
+                            <i class="fas fa-edit text-blue-700 dark:text-blue-400"></i>
+                        </div>
+                        <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full">
+                            <h3 class="text-lg leading-6 font-medium text-gray-900 dark:text-white" id="modal-title">
+                                Update Status
+                            </h3>
+                            <div class="mt-2">
+                                <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">
+                                    Change the status of this complaint and provide a reason for the user.
+                                </p>
+
+                                <!-- Status Dropdown -->
+                                <label for="modalStatusSelect"
+                                    class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">New
+                                    Status</label>
+                                <select id="modalStatusSelect"
+                                    class="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white sm:text-sm">
+                                    <option value="Pending">Pending</option>
+                                    <option value="In-Progress">In-Progress</option>
+                                    <option value="Resolved">Resolved</option>
+                                </select>
+
+                                <!-- Reason Textarea -->
+                                <label for="modalStatusReason"
+                                    class="block text-sm font-medium text-gray-700 dark:text-gray-300 mt-4 mb-1">Reason
+                                    / Feedback (Required)</label>
+                                <textarea id="modalStatusReason" rows="3"
+                                    class="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white sm:text-sm"
+                                    placeholder="e.g., Issue has been forwarded to the relevant department for immediate action, or The concerned authority has been notified and is working on a resolution"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-50 dark:bg-gray-700 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                    <button type="button" id="confirmStatusBtn"
+                        class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm">
+                        Update
+                    </button>
+                    <button type="button" id="cancelStatusBtn"
+                        class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 dark:border-gray-500 shadow-sm px-4 py-2 bg-white dark:bg-gray-800 text-base font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                        Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================ -->
+    <!-- PRIORITY MODAL -->
+    <!-- ============================ -->
+    <div id="priorityModal" class="fixed inset-0 z-50 hidden overflow-y-auto" aria-labelledby="modal-title"
+        role="dialog" aria-modal="true">
+        <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+            <div
+                class="inline-block align-bottom bg-white dark:bg-gray-800 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-sm sm:w-full">
+                <div class="bg-white dark:bg-gray-800 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                    <div class="sm:flex sm:items-start">
+                        <div
+                            class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-indigo-100 dark:bg-indigo-900 sm:mx-0 sm:h-10 sm:w-10">
+                            <i class="fas fa-flag text-indigo-600 dark:text-indigo-400"></i>
+                        </div>
+                        <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full">
+                            <h3 class="text-lg leading-6 font-medium text-gray-900 dark:text-white" id="modal-title">
+                                Set Priority
+                            </h3>
+                            <div class="mt-4 pb-8">
+                                <label for="modalPrioritySelect"
+                                    class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Assign
+                                    Priority Level for Resolution</label>
+                                <p class="text-sm text-gray-500 dark:text-gray-400 mb-3 space-y-1">
+                                    <span class="block"><strong>High:</strong> Immediate attention required.</span>
+                                    <span class="block"><strong>Medium:</strong> Standard resolution timeline.</span>
+                                    <span class="block"><strong>Low:</strong> Can be resolved comfortably.</span>
+                                </p>
+                                <select id="modalPrioritySelect"
+                                    class="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white sm:text-sm">
+                                    <option value="High">High</option>
+                                    <option value="Medium">Medium</option>
+                                    <option value="Low">Low</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-50 dark:bg-gray-700 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                    <button type="button" id="savePriorityBtn"
+                        class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm">
+                        Save
+                    </button>
+                    <button type="button" id="cancelPriorityBtn"
+                        class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 dark:border-gray-500 shadow-sm px-4 py-2 bg-white dark:bg-gray-800 text-base font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                        Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================ -->
+    <!-- REMOVE PRIORITY CONFIRM MODAL -->
+    <!-- ============================ -->
+    <div id="removePriorityModal" class="fixed inset-0 z-50 hidden overflow-y-auto" aria-labelledby="modal-title"
+        role="dialog" aria-modal="true">
+        <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+            <div
+                class="inline-block align-bottom bg-white dark:bg-gray-800 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-sm sm:w-full">
+                <div class="bg-white dark:bg-gray-800 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                    <div class="sm:flex sm:items-start">
+                        <div
+                            class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 dark:bg-red-900 sm:mx-0 sm:h-10 sm:w-10">
+                            <i class="fas fa-exclamation text-red-600 dark:text-red-400"></i>
+                        </div>
+                        <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full">
+                            <h3 class="text-lg leading-6 font-medium text-gray-900 dark:text-white" id="modal-title">
+                                Remove Priority?
+                            </h3>
+                            <div class="mt-2">
+                                <p class="text-sm text-gray-500 dark:text-gray-400">
+                                    Are you sure you want to remove the priority status from this complaint?
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-50 dark:bg-gray-700 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                    <button type="button" id="confirmRemovePriorityBtn"
+                        class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm">
+                        Remove
+                    </button>
+                    <button type="button" id="cancelRemovePriorityBtn"
+                        class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 dark:border-gray-500 shadow-sm px-4 py-2 bg-white dark:bg-gray-800 text-base font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                        Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================ -->
+    <!-- DELETE CONFIRM MODAL -->
+    <!-- ============================ -->
+    <div id="deleteModal" class="fixed inset-0 z-50 hidden overflow-y-auto" aria-labelledby="modal-title" role="dialog"
+        aria-modal="true">
+        <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+            <div
+                class="inline-block align-bottom bg-white dark:bg-gray-800 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+                <div class="bg-white dark:bg-gray-800 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                    <div class="sm:flex sm:items-start">
+                        <div
+                            class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 dark:bg-red-900 sm:mx-0 sm:h-10 sm:w-10">
+                            <i class="fas fa-exclamation-triangle text-red-600 dark:text-red-300"></i>
+                        </div>
+                        <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full">
+                            <h3 class="text-lg leading-6 font-medium text-gray-900 dark:text-white" id="modal-title">
+                                Delete Complaint
+                            </h3>
+                            <div class="mt-2">
+                                <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">
+                                    Are you sure you want to delete this complaint? This action cannot be undone. Please
+                                    provide a reason for deletion.
+                                </p>
+
+                                <!-- Reason Textarea -->
+                                <label for="modalDeleteReason"
+                                    class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Reason for
+                                    Deletion (Required)</label>
+                                <textarea id="modalDeleteReason" rows="3"
+                                    class="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-red-500 focus:border-red-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white sm:text-sm"
+                                    placeholder="e.g., Duplicate complaint already filed under ID #1234, or Spam/irrelevant content not related to university issues"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-50 dark:bg-gray-700 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                    <button type="button" id="confirmDeleteBtn"
+                        class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm">
+                        Delete
+                    </button>
+                    <button type="button" id="cancelDeleteBtn"
+                        class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 dark:border-gray-500 shadow-sm px-4 py-2 bg-white dark:bg-gray-800 text-base font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                        Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function () {
+            // Initialize EmailJS with Public Key
+            emailjs.init('08jWWtOPNjZJ4BcQw');
+        })();
+    </script>
+
+    <!-- Logout Confirmation Modal -->
+    <div id="logoutModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[60] hidden">
+        <div
+            class="bg-white dark:bg-gray-800 rounded-lg shadow-xl p-6 w-11/12 max-w-sm transform transition-all scale-100">
+            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Confirm Logout</h3>
+            <p class="text-gray-600 dark:text-gray-300 mb-6">Are you sure you want to log out?</p>
+            <div class="flex justify-end space-x-3">
+                <button id="cancelLogoutBtn"
+                    class="px-4 py-2 rounded-lg text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition font-medium">
+                    Cancel
+                </button>
+                <button id="confirmLogoutBtn"
+                    class="px-4 py-2 rounded-lg bg-red-600 text-white hover:bg-red-700 transition shadow-md font-bold">
+                    Log Out
+                </button>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
