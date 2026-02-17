@@ -94,26 +94,26 @@ We maintain a strict "Definition of Done" that requires every feature to pass:
    npm install
 3. **Configure Backend:**
 Create a .env file with your Supabase credentials:
- ```bash
-  Code snippet
-  VITE_SUPABASE_URL=your_project_url
-  VITE_SUPABASE_ANON_KEY=your_anon_key
- ```
+   ```bash
+     Code snippet
+     VITE_SUPABASE_URL=your_project_url
+     VITE_SUPABASE_ANON_KEY=your_anon_key
+   ```
 4. Development Mode:
- ```bash
-  npm run dev
- ```
+  ```bash
+     npm run dev
+  ```
 5. Run Automated Tests:
- ```bash
-  pytest --alluredir=reports
- ```
+  ```bash
+     pytest --alluredir=reports
+  ```
 
-## Team & Roles
+### 👥 Team & Roles
 
-Fathima Salma Muzammil (CB009970): Scrum Master (Sprint 1), Quality Assurance Analyst (Sprint 2), Business Analyst & Developer (Sprint 3)
+* **Fathima Salma Muzammil (CB009970):** Scrum Master (Sprint 1), Quality Assurance Analyst (Sprint 2), Business Analyst & Developer (Sprint 3)
 
-Mohideen Jiffry Fathima Shahany (CB013281): Business Analyst & Developer (Sprint 1), Scrum Master (Sprint 2), Quality Assurance Analyst (Sprint 3)
+* **Mohideen Jiffry Fathima Shahany (CB013281):** Business Analyst & Developer (Sprint 1), Scrum Master (Sprint 2), Quality Assurance Analyst (Sprint 3)
 
-Kodikara Arachchige Vidma Jayani (CB013174):   Quality Assurance Analyst (Sprint 1), Business Analyst & Developer (Sprint 2), Scrum Master Sprint 3)
+* **Kodikara Arachchige Vidma Jayani (CB013174):**   Quality Assurance Analyst (Sprint 1), Business Analyst & Developer (Sprint 2), Scrum Master Sprint 3)
 
-Developed for Staffordshire University | COMP50001: Commercial Computing II
+## 🧑🏻‍💻 Developed for Staffordshire University | COMP50001: Commercial Computing II
