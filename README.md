@@ -1,4 +1,4 @@
-# ComplaNet — Advanced University Concern & Lost and Found Management System
+# ComplaNet — University Concern & Lost and Found Management System
 [![Framework](https://img.shields.io/badge/Vite-7.1-646CFF?logo=vite)](https://vitejs.dev/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-38B2AC?logo=tailwind-css)](https://tailwindcss.com/)
 [![Database](https://img.shields.io/badge/Backend-Supabase-3ECF8E?logo=supabase)](https://supabase.com/)
@@ -113,6 +113,6 @@ Create a .env file with your Supabase credentials:
 
 * **Mohideen Jiffry Fathima Shahany (CB013281):** Business Analyst & Developer (Sprint 1), Scrum Master (Sprint 2), Quality Assurance Analyst (Sprint 3)
 
-* **Kodikara Arachchige Vidma Jayani (CB013174):**   Quality Assurance Analyst (Sprint 1), Business Analyst & Developer (Sprint 2), Scrum Master Sprint 3)
+* **Kodikara Arachchige Vidma Jayani (CB013174):**   Quality Assurance Analyst (Sprint 1), Business Analyst & Developer (Sprint 2), Scrum Master (Sprint 3)
 
 ### 🧑🏻‍💻 Developed for Staffordshire University | COMP50001: Commercial Computing II
