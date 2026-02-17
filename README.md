@@ -1,4 +1,4 @@
-# ComplaNet — Advanced University Concern & Asset Management System
+# ComplaNet — Advanced University Concern & Lost and Found Management System
 [![Framework](https://img.shields.io/badge/Vite-7.1-646CFF?logo=vite)](https://vitejs.dev/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-38B2AC?logo=tailwind-css)](https://tailwindcss.com/)
 [![Database](https://img.shields.io/badge/Backend-Supabase-3ECF8E?logo=supabase)](https://supabase.com/)
@@ -95,18 +95,17 @@ We maintain a strict "Definition of Done" that requires every feature to pass:
 3. **Configure Backend:**
 Create a .env file with your Supabase credentials:
    ```bash
-     Code snippet
-     VITE_SUPABASE_URL=your_project_url
-     VITE_SUPABASE_ANON_KEY=your_anon_key
+   VITE_SUPABASE_URL=your_project_url
+   VITE_SUPABASE_ANON_KEY=your_anon_key
    ```
-4. Development Mode:
-  ```bash
-     npm run dev
-  ```
-5. Run Automated Tests:
-  ```bash
-     pytest --alluredir=reports
-  ```
+4. **Development Mode:**
+   ```bash
+   npm run dev
+   ```
+5. **Run Automated Tests:**
+   ```bash
+   pytest --alluredir=reports
+   ```
 
 ### 👥 Team & Roles
 
@@ -116,4 +115,4 @@ Create a .env file with your Supabase credentials:
 
 * **Kodikara Arachchige Vidma Jayani (CB013174):**   Quality Assurance Analyst (Sprint 1), Business Analyst & Developer (Sprint 2), Scrum Master Sprint 3)
 
-## 🧑🏻‍💻 Developed for Staffordshire University | COMP50001: Commercial Computing II
+### 🧑🏻‍💻 Developed for Staffordshire University | COMP50001: Commercial Computing II
